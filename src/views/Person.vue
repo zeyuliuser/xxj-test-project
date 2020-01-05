@@ -4,50 +4,73 @@
     :data="tableData"
     style="margin-left:40px;">
     <el-table-column
-      label="课程名称"
-      width="180">
+      label="id"
+      width="100">
       <template slot-scope="scope">
         <i class="el-icon-notebook-1"></i>
-        <span style="margin-left: 10px">{{ scope.row.courseName }}</span>
+        <span style="margin-left: 10px">{{ scope.row.id }}</span>
       </template>
     </el-table-column>
 
     <el-table-column
-      label="创建时间"
+      label="姓名"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.createTime }}</span>
+        <span style="margin-left: 10px">{{ scope.row.name }}</span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      label="年龄"
+      width="100">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.age }}</span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      label="职业"
+      width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.vocation }}</span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      label="地址"
+      width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.address }}</span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      label="性别"
+      width="100">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.sex}}</span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      label="电话"
+      width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.mobile}}</span>
       </template>
     </el-table-column>
 
     
-    <el-table-column label="操作" style="width:40px;">
-      <template slot-scope="scope">
-         <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">发布评论</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
+    
 
   </el-table>
 
-  
-<el-dialog title="评论发布" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="评论">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="send">发送</el-button>
-  </div>
-</el-dialog>
 </div>
 </template>
 
@@ -56,17 +79,12 @@
     data() {
       return {
         sendComIndex:null,
-        tableData: [],
-        dialogFormVisible:false,
-        form:{
-          name:''
-        }
+        tableData: []
       }
     },
     mounted(){
-      this.$axios.post('/serv/selectCourseQuery', {
-	"servUserId":localStorage.getItem('servUserId')
-}
+      this.$axios.post('/serv/query', {
+	"name":localStorage.getItem("name")}
 ).then(res=>{
   console.log(res)
   this.tableData =res.data.output.content;

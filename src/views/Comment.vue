@@ -23,10 +23,7 @@
 
     
     <el-table-column label="操作" style="width:40px;">
-      <template slot-scope="scope">
-         <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">发布评论</el-button>
+      <template slot-scope="scope">      
         <el-button
           size="mini"
           type="danger"
@@ -36,18 +33,6 @@
 
   </el-table>
 
-  
-<el-dialog title="评论发布" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="评论">
-      <el-input v-model="form.name" autocomplete="off"></el-input>
-    </el-form-item>
-  </el-form>
-  <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="send">发送</el-button>
-  </div>
-</el-dialog>
 </div>
 </template>
 
@@ -56,16 +41,12 @@
     data() {
       return {
         sendComIndex:null,
-        tableData: [],
-        dialogFormVisible:false,
-        form:{
-          name:''
-        }
+        tableData: []
       }
     },
     mounted(){
       this.$axios.post('/serv/selectCourseQuery', {
-	"servUserId":localStorage.getItem('servUserId')
+	"servUserId":2
 }
 ).then(res=>{
   console.log(res)
